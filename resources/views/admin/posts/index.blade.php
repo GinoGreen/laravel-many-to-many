@@ -15,6 +15,7 @@
                   <th scope="col">ID</th>
                   <th scope="col">Titolo</th>
                   <th scope="col">Categoria</th>
+                  <th scope="col">Tag</th>
                   <th scope="col">Azioni</th>
                </tr>
             </thead>
@@ -29,6 +30,13 @@
                         @else
                            -
                         @endif
+                     </td>
+                     <td>
+                        @forelse ($post->tags as $tag)
+                           <span class="badge bg-info text-dark">{{ $tag->name }}</span>
+                        @empty
+                           -
+                        @endforelse
                      </td>
                      <td class="d-flex justify-content-around">
                         <button class="btn btn-primary"><a class="text-dark" href="{{ route('admin.post.show', $post) }}">Show</a></button>
