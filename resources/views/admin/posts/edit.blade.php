@@ -47,6 +47,25 @@
                @endforeach
             </select>
          </div>
+         <div class="mb-3 form-check">
+            @foreach ($tags as $tag)
+               <input type="checkbox"
+                  class="form-check-input"
+                  id="tag{{ $loop->iteration }}"
+                  name="tags[]"
+                  value="{{ $tag->id }}"
+
+                  @if (!$errors->any() && $post->tags->contains($tag->id))
+                     checked
+                  @elseif ($errors->any() && in_array($tag->id, old('tags', [])))
+                     checked
+                  @endif
+               >
+               <label class="form-check-label mr-5"
+                  for="tag{{ $loop->iteration }}"
+               >{{ $tag->name }}</label>
+            @endforeach
+         </div>
          <div class="mb-3">
             <label class="form-check-label" for="content">Contenuto</label>
             <textarea

@@ -80,8 +80,10 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         if ($post) {
+            
             $categories = Category::all();
-            return view('admin.posts.edit', compact('post', 'categories'));
+            $tags = Tag::all();
+            return view('admin.posts.edit', compact('post', 'categories', 'tags'));
         }
         abort(404, 'Post non trovato');
     }
@@ -100,6 +102,12 @@ class PostController extends Controller
             $form_data['slug'] = Post::generateUniqueSlug($form_data['title']);
         }
         $post->update($form_data);
+
+        if (array_key_exists('tags', $form_data)) {
+            $post->tags()->sync($form_data['tags']);
+        } else {
+            $post->tags()->detach();
+        }
 
         return redirect()->route('admin.post.show', $post);
     }
