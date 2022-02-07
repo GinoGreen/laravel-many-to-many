@@ -37,7 +37,7 @@
          <div class="mb-3">
             <label class="form-check-label" for="category_id">Categoria</label>
             <select class="form-control mb-3" name="category_id">
-               <option>Seleziona la categoria</option>
+               <option value="">Seleziona la categoria</option>
                @foreach ($categories as $category)
                   <option value="{{ $category->id }}"
                      @if ($category->id == old('category_id'))
@@ -52,9 +52,9 @@
                <input type="checkbox"
                   class="form-check-input"
                   id="tag{{ $loop->iteration }}"
-                  name="tag[]"
+                  name="tags[]"
                   value="{{ $tag->id }}"
-                  @if (in_array($tag->id, old('tag', [])))
+                  @if (in_array($tag->id, old('tags', [])))
                      checked
                   @endif
                >

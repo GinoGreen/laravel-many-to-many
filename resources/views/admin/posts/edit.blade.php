@@ -10,11 +10,11 @@
          @endforeach
       </div>
       @endif
-      <h1>Crea Post</h1>
+      <h1>Modifica Post</h1>
       <form action="{{ route('admin.post.update', $post) }}" method="POST">
          @csrf
          @method('PUT')
-         <div class="mb-3 form-check">
+         <div class="mb-3">
             <label class="form-check-label" for="title">Titolo</label>
             <input 
                type="text" 
@@ -34,7 +34,7 @@
                @enderror">{{ $message }}</p>
             @enderror
          </div>
-         <div class="mb-3 form-check">
+         <div class="mb-3">
             <label class="form-check-label" for="category_id">Categoria</label>
             <select class="form-control mb-3" name="category_id">
                <option>Seleziona la categoria</option>
@@ -47,7 +47,7 @@
                @endforeach
             </select>
          </div>
-         <div class="mb-3 form-check">
+         <div class="mb-3">
             <label class="form-check-label" for="content">Contenuto</label>
             <textarea
                name="content"

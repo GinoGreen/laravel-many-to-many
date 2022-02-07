@@ -48,6 +48,10 @@ class PostController extends Controller
         $new_post->fill($data);
         $new_post->slug = Post::generateUniqueSlug($new_post->title);
         $new_post->save();
+
+        if (array_key_exists('tags', $data)) {
+            $new_post->tags()->attach($data['tags']);
+        }
         return redirect()->route('admin.post.show', $new_post);
     }
 
