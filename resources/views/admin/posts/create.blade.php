@@ -54,7 +54,7 @@
                   id="tag{{ $loop->iteration }}"
                   name="tag[]"
                   value="{{ $tag->id }}"
-                  @if ($tag->id == old($tag->id, []))
+                  @if (in_array($tag->id, old('tag', [])))
                      checked
                   @endif
                >
