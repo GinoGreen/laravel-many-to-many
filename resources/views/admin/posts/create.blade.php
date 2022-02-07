@@ -14,7 +14,7 @@
       <form action="{{ route('admin.post.store') }}" method="POST">
          @csrf
          @method('POST')
-         <div class="mb-3 form-check">
+         <div class="mb-3">
             <label class="form-check-label" for="title">Titolo</label>
             <input 
                type="text" 
@@ -34,7 +34,7 @@
                @enderror">{{ $message }}</p>
             @enderror
          </div>
-         <div class="mb-3 form-check">
+         <div class="mb-3">
             <label class="form-check-label" for="category_id">Categoria</label>
             <select class="form-control mb-3" name="category_id">
                <option>Seleziona la categoria</option>
@@ -48,6 +48,22 @@
             </select>
          </div>
          <div class="mb-3 form-check">
+            @foreach ($tags as $tag)
+               <input type="checkbox"
+                  class="form-check-input"
+                  id="tag{{ $loop->iteration }}"
+                  name="tag[]"
+                  value="{{ $tag->id }}"
+                  @if ($tag->id == old($tag->id, []))
+                     checked
+                  @endif
+               >
+               <label class="form-check-label mr-5"
+                  for="tag{{ $loop->iteration }}"
+               >{{ $tag->name }}</label>
+            @endforeach
+         </div>
+         <div class="mb-3">
             <label class="form-check-label" for="content">Contenuto</label>
             <textarea
                name="content"
